@@ -17,38 +17,32 @@ function confirmar(){
     return;
   }
 
-  // Construir datos para enviar
-  let data = {
+  // Construir datos para enviar como parámetros
+  let params = new URLSearchParams({
     invitado: invitado || "",
     nombre: nombre,
     personas: personas,
     asistencia: asistencia
-  };
+  });
 
   // URL del Google Apps Script
-  let url = "https://script.google.com/macros/s/AKfycbwI1KSQEEViE1JRBZnR_JfduKuJ3Lq2nIPmvfTaptpKVGVbmyD01GebjnRYthmmndgh/exec";
+  let url = "https://script.google.com/macros/s/AKfycbwI1KSQEEViE1JRBZnR_JfduKuJ3Lq2nIPmvfTaptpKVGVbmyD01GebjnRYthmmndgh/exec?" + params.toString();
 
-  // Enviar datos por POST
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(response => response.json())
-  .then(result => {
-    if(result.status === "ok"){
-      alert("¡Confirmación enviada correctamente! Gracias por tu respuesta.");
-      // Limpiar campos
-      document.getElementById("nombre").value = "";
-      document.getElementById("personas").value = "";
-      document.getElementById("asistencia").value = "Si";
-    }else{
-      alert("Hubo un error al enviar la confirmación. Intenta de nuevo.");
-    }
-  })
-  .catch(() => {
-    alert("Hubo un error de conexión. Intenta de nuevo.");
-  });
+  // Enviar datos por GET
+  fetch(url)
+    .then(response => response.json())
+    .then(result => {
+      if(result.status === "ok"){
+        alert("¡Confirmación enviada correctamente! Gracias por tu respuesta.");
+        // Limpiar campos
+        document.getElementById("nombre").value = "";
+        document.getElementById("personas").value = "";
+        document.getElementById("asistencia").value = "Si";
+      }else{
+        alert("Hubo un error al enviar la confirmación. Intenta de nuevo.");
+      }
+    })
+    .catch(() => {
+      alert("Hubo un error de conexión. Intenta de nuevo.");
+    });
 }
