@@ -26,7 +26,7 @@ function confirmar(){
   };
 
   // URL del Google Apps Script
-  let url = "https://script.google.com/macros/s/AKfycbx8MUyjmXC6k-57sR9spu-FRsyoX26cfeH3nxtcZKCWRMBP5sSCVNBRMDriYNEq-v7k/exec";
+  let url = "https://script.google.com/macros/s/AKfycbwI1KSQEEViE1JRBZnR_JfduKuJ3Lq2nIPmvfTaptpKVGVbmyD01GebjnRYthmmndgh/exec";
 
   // Enviar datos por POST
   fetch(url, {
